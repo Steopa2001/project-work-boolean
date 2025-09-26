@@ -2,8 +2,8 @@ const eventi = [
   {
     id: 1,
     location: "Milano",
-    dataInizio: "2025-10-01",
-    dataFine: "2025-10-03",
+    dataInizio: "2025-09-20",
+    dataFine: "2025-09-30",
     operatore: "Luca Rossi",
     status: "pronto",
     partecipanti: [
@@ -81,8 +81,8 @@ const eventi = [
   {
     id: 4,
     location: "Torino",
-    dataInizio: "2026-01-15",
-    dataFine: "2026-01-18",
+    dataInizio: "2025-09-23",
+    dataFine: "2025-09-30",
     operatore: "Sara Bianchi",
     status: "pronto",
     partecipanti: [
