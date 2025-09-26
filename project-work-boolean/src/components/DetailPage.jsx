@@ -4,28 +4,13 @@ import eventi from "../eventi";
 
 function DetailPage() {
   const { id } = useParams();
-
   const evento = eventi.find((e) => e.id === parseInt(id));
-
-  if (!evento) {
-  return (
-    <div className="container py-5 text-center">
-      <h3>Viaggio non trovato</h3>
-      <Link to="/" className="btn btn-outline-primary mt-3">
-        Torna alla lista
-      </Link>
-    </div>
-  );
-}
-
-
   const [search, setSearch] = useState("");
 
   const partecipantiFiltrati = evento.partecipanti.filter((p) =>
     `${p.nome} ${p.cognome}`.toLowerCase().includes(search.toLowerCase())
   );
 
-  // id dell'accordion unico per evento
   const accordionId = `partecipantiAccordion-${evento.id}`;
 
   return (
@@ -45,35 +30,36 @@ function DetailPage() {
               onChange={(e) => setSearch(e.target.value)}
             />
 
-            <h3 className="mt-4">Partecipanti</h3>
+            <h3 className="mt-4">Partecipanti:</h3>
 
             <div id={accordionId}>
               {partecipantiFiltrati.length > 0 ? (
-                partecipantiFiltrati.map((p) => {
-                  const collapseId = `p-${evento.id}-${p.id}`; // unico tra eventi
+                partecipantiFiltrati.map((p, idx) => {
+                  const uid = p.id ?? idx; // fallback se p.id non esiste
+                  const collapseId = `p-${evento.id}-${uid}`;
                   return (
-                    <div className="card col-12 mb-2 text-start my-3" key={p.id}>
+                    <div className="card col-12 mb-2 text-start my-3" key={p.codiceFiscale || uid}>
                       <button
                         className="btn btn-link text-decoration-none fw-bold text-danger-emphasis"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target={`#${collapseId}`}
+                        aria-expanded="false"
+                        aria-controls={collapseId}
                       >
                         {p.nome} {p.cognome}
                       </button>
 
-                      <div id={collapseId} className="collapse">
+                      <div
+                        id={collapseId}
+                        className="collapse"
+                        data-bs-parent={`#${accordionId}`}
+                      >
                         <div className="card-body">
                           <ul className="list-unstyled mb-0">
-                            <li>
-                              <strong>Codice fiscale:</strong> {p.codiceFiscale}
-                            </li>
-                            <li>
-                              <strong>Email:</strong> {p.email}
-                            </li>
-                            <li>
-                              <strong>Cellulare:</strong> {p.cellulare}
-                            </li>
+                            <li><strong>Codice fiscale:</strong> {p.codiceFiscale}</li>
+                            <li><strong>Email:</strong> {p.email}</li>
+                            <li><strong>Cellulare:</strong> {p.cellulare}</li>
                           </ul>
                         </div>
                       </div>
@@ -81,17 +67,12 @@ function DetailPage() {
                   );
                 })
               ) : (
-                <div className="alert alert-secondary">
-                  Nessun partecipante trovato
-                </div>
+                <div className="alert alert-secondary">Nessun partecipante trovato</div>
               )}
             </div>
+
             <div className="to-home-btn">
-              <Link
-                className="square-btn-to-home"
-                to="/"
-                title="Torna alla homepage"
-              >
+              <Link className="square-btn-to-home" to="/" title="Torna alla homepage">
                 <i className="fas fa-house"></i>
               </Link>
             </div>
