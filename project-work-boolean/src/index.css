@@ -1,0 +1,62 @@
+*{
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+.logo {
+  width: 100px;
+} 
+
+header {
+  background-color: rgb(165, 42, 42);
+}
+
+.my-button { 
+  background-color: #ec812f;
+  border: 2px solid black;
+  padding: 15px;
+}
+
+.open-sans-uniquifier  {
+  font-family: "Rubik Moonrocks", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.orange {
+  color: rgb(236, 129, 47)
+}
+
+.brown {
+  color: rgb(165, 42, 42);
+}
+
+.none{
+  text-decoration: none;
+}
+
+.to-home-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+}
+
+.square-btn-to-home {
+  border: 2px solid white;
+  padding: 30px;
+  background-color: rgb(236, 129, 47);
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.square-btn-to-home:hover {
+  border: 2px solid rgb(236, 129, 47);
+  background-color: white;
+  color: rgb(236, 129, 47);
+}
+
+.padding{
+  padding-right: 200px;
+}
